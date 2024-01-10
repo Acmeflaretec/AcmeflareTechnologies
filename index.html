@@ -26,7 +26,7 @@
 
   <!-- MAIN CSS -->
   <link rel="stylesheet" href="css/style.css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>Acmeflare Technologies Pvt Ltd</title>
 
 </head>
@@ -75,10 +75,8 @@
             <nav class="site-navigation text-left mr-auto " role="navigation">
               <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                 <li class="active"><a href="index.html" class="nav-link">Home</a></li>
-                <!-- <li><a href="technology.html" class="nav-link">Technology</a></li> -->
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#service" class="nav-link">Services</a></li>
-                <!-- <li><a href="blog.html" class="nav-link">Blog</a></li> -->
                 <li><a href="#contact" class="nav-link">Contact</a></li>
               </ul>
             </nav>
@@ -363,32 +361,37 @@
               <strong class="subtitle text-primary">Contact Us</strong>
               <h2 class="heading">Let's have a talk</h2>
             </div>
-            <form class="contact-form">
+            <form class="contact-form" id="contact-form" action="">
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="text-black" for="fname">First name</label>
-                    <input type="text" class="form-control" id="fname">
+                    <label class="text-black" for="fname">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" onkeyup="validateName()">
+                    <p class="error" id="errName"></p>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <label class="text-black" for="lname">Last name</label>
-                    <input type="text" class="form-control" id="lname">
+                    <label class="text-black" for="lname">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="contact number" name="phone">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="text-black" for="email">Email address</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                  onkeyup="validateEmail()">
+                <p class="error" id="errEmail"></p>
               </div>
 
               <div class="form-group">
                 <label class="text-black" for="message">Message</label>
-                <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+                <textarea class="form-control" name="message" id="message" placeholder="Write your message here"
+                  onkeyup="validateMsg()" cols="30" rows="5"></textarea>
+                <p class="error" id="errMsg"></p>
               </div>
-
-              <button type="submit" class="btn btn-primary">Send Message</button>
+              <button type="submit" class="btn btn-primary"
+                onclick="validateName(); validateEmail(); validateMsg();">Send Message</button>
             </form>
           </div>
 
@@ -486,7 +489,7 @@
     </footer>
 
   </div>
-
+  <script src="js/script.js"></script>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.bundle.min"></script>
   <script src="js/owl.carousel.min.js"></script>
