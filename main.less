@@ -35,7 +35,11 @@
     transform: rotate(3deg);
     animation: rnUnit 2s ease infinite;
 }
-
+@media (max-width: 768px) {
+.rnUnit{
+   display: none;
+}
+}
 @keyframes rnUnit {
     50% {
         transform: rotate(-3deg) ;
