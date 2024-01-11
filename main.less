@@ -78,17 +78,60 @@
 .aoTable {
     display: table;
     width: 100%;
-    // height: 100vh;  
+    height: 70vh;  
     text-align: center;
+    background-image:url('./images/poster.png');
+    background-repeat:no-repeat;
+    background-size:cover;
 }
-.aoTableCell {
-    color:darken(@accent,12%);
-    display: table-cell;
-    vertical-align: middle;
-    transition:color 3s ease;
+@media (max-width: 768px) {
+    .aoTable {
+        display: table;
+        width: 100%;
+        height: 70vh;  
+        text-align: center;
+        background-image:url('./images/poster-1.jpg');
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+  }
+  .aoTableCell {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      // height: 100%;
+      color:darken(@accent,12%);
+      display: table-cell;
+      vertical-align: bottom;
+      transition:color 3s ease;
+      height: 100%;
+      padding-bottom: 50px;
+    }
+    @media (max-width: 768px) {
+        .aoTableCell {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            // height: 100%;
+            color:darken(@accent,12%);
+            display: table-cell;
+            vertical-align: bottom;
+            transition:color 3s ease;
+            height: 100%;
+            padding-bottom: 30px;
+        }
+      }
+
+.register-now {
+    text-decoration: none !important;
+    padding: 15px 20px !important;
+    color: azure;
+    font-size: large;
+    height: 200px;
+    width: 300px;
+    background-color: rgb(179, 130, 25);
+    
 }
-
-
 
 .rnOuter:hover .rnInner {
     transform-origin: -120% top;
