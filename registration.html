@@ -9,14 +9,181 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            line-height: 1.5;
+            background-color: #f1f3fb;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container-custom {
+            background: #FFF;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .25);
+            overflow: hidden;
+        }
+
+        .poster {
+            background-image: url('./images/Acmeflare free website poster copy.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 2;
+        }
+
+        .card-custom {
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: .75rem;
+        }
+
+        .card-heading {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #735400;
+            line-height: 1.222;
+            text-align: center;
+        }
+
+        .input-field {
+            border: 0;
+            border-bottom: 2px solid #eee;
+            font-size: 1.125rem;
+            padding: .25rem 0;
+        }
+
+        .input-field:focus {
+            outline: 0;
+            border-bottom-color: #6658d3;
+        }
+
+        .action-button {
+            font-size: 1.25rem;
+            padding: 1em;
+            font-weight: 500;
+            background-color: #6658d3;
+            border-radius: 6px;
+            color: #FFF;
+            border: 0;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .card-info {
+            text-align: center;
+            font-size: .875rem;
+            color: #8597a3;
+        }
+
+        .card-info a {
+            color: #6658d3;
+            text-decoration: none;
+        }
+
+        .modal-content-custom {
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div style="display: flex; width: 100vw; height: 100vh; justify-content: center;">
-        <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSd7hFRP-zTpDqVg6l_9kuS6-LtMV5A7lK6v0aegrUTe2fvsDg/viewform?embedded=true"
-            width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <div class="container container-custom p-3">
+        <div class="row no-gutters">
+            <div class="col-md-6 poster"></div>
+            <div class="col-md-6">
+                <div class="form-container p-4">
+                    <h1 class="text-center text-primary">Register Now!</h1>
+                    <div class="card card-custom">
+                        <form id="registrationForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" class="form-control input-field" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone No</label>
+                                <input type="text" class="form-control input-field" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control input-field" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="business-name">Business Name</label>
+                                <input type="text" class="form-control input-field" id="business-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Select your language:</label>
+                                <select id="language" class="form-control" required>
+                                    <option value="english">English</option>
+                                    <option value="malayalam">Malayalam</option>
+                                    <option value="tamil">Tamil</option>
+                                    <option value="hindi">Hindi</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary action-button">Request a call back</button>
+                            </div>
+                        </form>
+                        <div class="card-info">
+                            <p>We will contact you within 24 hours. If we don't get a call within 24 hours, Please WhatsApp us on 7907935902. Regards, Team Acmeflare</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thank You</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>We will contact you within 24 hours. If we don't call within 24 hours, WhatsApp us on 7907935902. Regards, Team Acmeflare</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registrationForm').on('submit', function(event) {
+                event.preventDefault();
+                const fullName = $('#fullName').val();
+                const email = $('#email').val();
+                const phone = $('#phone').val();
+
+                if (fullName && email && phone) {
+                    $('#myModal').modal('show');
+                } else {
+                    alert('Please fill in all the fields.');
+                }
+            });
+
+            $('.close').on('click', function() {
+                $('#myModal').modal('hide');
+            });
+
+            $(window).on('click', function(event) {
+                if ($(event.target).is('#myModal')) {
+                    $('#myModal').modal('hide');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
