@@ -26,23 +26,36 @@
         }
 
         .container-custom {
+            align-items: center;
             background: #FFF;
             border-radius: 10px;
             box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .25);
+            /* overflow-y: scroll; */
+            height: 100vh;
+            padding: 100px;
+            width: 100vw;
             overflow: hidden;
         }
 
         .poster {
-            background-image: url('./images/Acmeflare free website poster copy.jpg');
-            background-size: cover;
+            background-image: url('./images/poster.png');
+            height: 98vh;
+            background-repeat: no-repeat;
+            background-size: contain;
             background-position: center;
-            height: 2;
+        }
+
+        @media (max-width: 991.98px) {
+            .poster {
+                display: none;
+            }
         }
 
         .card-custom {
             background-color: #FFF;
             border-radius: 10px;
             padding: .75rem;
+            margin-top: 40px;
         }
 
         .card-heading {
@@ -66,14 +79,13 @@
         }
 
         .action-button {
-            font-size: 1.25rem;
-            padding: 1em;
+            font-size: 1rem;
             font-weight: 500;
             background-color: #6658d3;
             border-radius: 6px;
             color: #FFF;
             border: 0;
-            cursor: pointer;
+            /* cursor: pointer; */
             width: 100%;
         }
 
@@ -92,50 +104,66 @@
             border-radius: 10px;
             text-align: center;
         }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container container-custom p-3">
-        <div class="row no-gutters">
-            <div class="col-md-6 poster"></div>
-            <div class="col-md-6">
-                <div class="form-container p-4">
-                    <h1 class="text-center text-primary">Register Now!</h1>
-                    <div class="card card-custom">
-                        <form id="registrationForm">
-                            <div class="form-group">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" class="form-control input-field" id="fullName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone No</label>
-                                <input type="text" class="form-control input-field" id="phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control input-field" id="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="business-name">Business Name</label>
-                                <input type="text" class="form-control input-field" id="business-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="language">Select your language:</label>
-                                <select id="language" class="form-control" required>
-                                    <option value="english">English</option>
-                                    <option value="malayalam">Malayalam</option>
-                                    <option value="tamil">Tamil</option>
-                                    <option value="hindi">Hindi</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary action-button">Request a call back</button>
-                            </div>
-                        </form>
-                        <div class="card-info">
-                            <p>We will contact you within 24 hours. If we don't get a call within 24 hours, Please WhatsApp us on 7907935902. Regards, Team Acmeflare</p>
+    <div class="container-custom p-3 d-flex">
+        <div class="col-lg-8 poster"></div>
+        <div class="col-md-12 col-lg-4">
+            <div class="form-container p-4">
+                <h2 class="text-center text-primary"><b>Register Now!</b></h2>
+                <div class="card card-custom">
+                    <form id="registrationForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" class="form-control input-field" name="name" id="fullName">
+                            <div id="fullNameError" class="error-message"></div>
                         </div>
+                        <div class="form-group">
+                            <label for="phone">Phone No</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">+91</span>
+                                </div>
+                                <input type="text" pattern="\d{10}" class="form-control input-field" id="phone"
+                                    name="phone" title="Please enter a valid phone number.">
+                            </div>
+                            <small id="phoneError" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control input-field" id="email" name="email">
+                            <div id="emailError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="business-name">Business Name</label>
+                            <input type="text" class="form-control input-field" id="business-name" name="bussiness">
+                            <div id="businessNameError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Select your language:</label>
+                            <select id="language" class="form-control" name="language">
+                                <option value="english">English</option>
+                                <option value="malayalam">Malayalam</option>
+                                <option value="tamil">Tamil</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+                            <div id="languageError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <button id="submitButton" type="submit" class="btn btn-primary action-button">Request a call
+                                back</button>
+                        </div>
+                    </form>
+                    <div class="card-info">
+                        <p>We will contact you within 24 hours. If you didn't get a call within 24 hours, Please
+                            WhatsApp us on 7907935902. Regards, Team Acmeflare</p>
                     </div>
                 </div>
             </div>
@@ -146,11 +174,15 @@
         <div class="modal-dialog">
             <div class="modal-content modal-content-custom">
                 <div class="modal-header">
-                    <h5 class="modal-title">Thank You</h5>
+                    <h5 class="modal-title">Thank You for Registering</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>We will contact you within 24 hours. If we don't call within 24 hours, WhatsApp us on 7907935902. Regards, Team Acmeflare</p>
+                    <p>We will contact you within 24 hours. If you didn't get call within 24 hours, WhatsApp us on
+                        <a
+                            href="https://api.whatsapp.com/send?phone=917907935902&text=Hi%C2%A0there,%C2%A0Let%27s%C2%A0have%C2%A0a%C2%A0talk">7907935902</a>.
+                    </p>
+                    Regards, Team Acmeflare
                 </div>
             </div>
         </div>
@@ -159,25 +191,112 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#registrationForm').on('submit', function(event) {
+        function validateFullName() {
+            const fullName = $('#fullName').val();
+            if (!fullName) {
+                $('#fullNameError').text('Full Name is required.');
+                return false;
+            } else if (fullName?.length < 3) {
+                $('#fullNameError').text('Please Enter atleast 3 charachters.');
+                return false;
+            } else {
+                $('#fullNameError').text('');
+                return true;
+            }
+        }
+
+        function validatePhone() {
+            const phone = $('#phone').val();
+            const phonePatternWithoutCountryCode = /^\d{10}$/; // 10 digits only
+            if (!phone) {
+                $('#phoneError').text('Phone number is required.');
+                return false;
+            } else if (phonePatternWithoutCountryCode.test(phone)) {
+                $('#phoneError').text('');
+                return true;
+            } else {
+                $('#phoneError').text('Please enter a valid phone number.');
+                return false;
+            }
+        }
+
+        function validateEmail() {
+            const email = $('#email').val();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email) {
+                $('#emailError').text('Email is required.');
+                return false;
+            } else if (!emailPattern.test(email)) {
+                $('#emailError').text('Please enter a valid email address.');
+                return false;
+            } else {
+                $('#emailError').text('');
+                return true;
+            }
+        }
+
+        function validateBusinessName() {
+            const businessName = $('#business-name').val();
+            if (!businessName) {
+                $('#businessNameError').text('Business Name is required.');
+                return false;
+            } else {
+                $('#businessNameError').text('');
+                return true;
+            }
+        }
+
+        function validateLanguage() {
+            const language = $('#language').val();
+            if (!language) {
+                $('#languageError').text('Please select a language.');
+                return false;
+            } else {
+                $('#languageError').text('');
+                return true;
+            }
+        }
+
+        $(document).ready(function () {
+            $('#registrationForm').on('submit', function (event) {
                 event.preventDefault();
-                const fullName = $('#fullName').val();
-                const email = $('#email').val();
-                const phone = $('#phone').val();
+                $('#submitButton').prop('disabled', true);
+                const isFullNameValid = validateFullName();
+                const isPhoneValid = validatePhone();
+                const isEmailValid = validateEmail();
+                const isBusinessNameValid = validateBusinessName();
+                const isLanguageValid = validateLanguage();
 
-                if (fullName && email && phone) {
-                    $('#myModal').modal('show');
-                } else {
-                    alert('Please fill in all the fields.');
+                if (isFullNameValid && isPhoneValid && isEmailValid && isBusinessNameValid && isLanguageValid) {
+
+                    $.ajax({
+                        url: "https://script.google.com/macros/s/AKfycbwsFDP9OkUerpWN1U5asGnsiQg8UhPQbB9kdLXjZ8OBmH-oppnZxn6N0d3GwLPA2M8N/exec",
+                        data: $("#registrationForm").serialize(),
+                        method: "post",
+                        success: function (response) {
+                            $('#myModal').modal('show');
+                            $('#registrationForm')[0].reset();
+                            $('#submitButton').prop('disabled', false);
+                        },
+                        error: function (err) {
+                            alert("Something went Wrong")
+                        }
+                    })
                 }
-            });
+            })
 
-            $('.close').on('click', function() {
+
+            $('#fullName').on('input', validateFullName);
+            $('#phone').on('input', validatePhone);
+            $('#email').on('input', validateEmail);
+            $('#business-name').on('input', validateBusinessName);
+            $('#language').on('change', validateLanguage);
+
+            $('.close').on('click', function () {
                 $('#myModal').modal('hide');
             });
 
-            $(window).on('click', function(event) {
+            $(window).on('click', function (event) {
                 if ($(event.target).is('#myModal')) {
                     $('#myModal').modal('hide');
                 }
